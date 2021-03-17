@@ -1,0 +1,243 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./style.css"/>
+        <script>
+
+            /*
+
+            Research: https://www.nickkolenda.com/subliminal-messages/
+
+            */
+
+            let frames = 0;
+            let startTime;
+            let currentTime;
+            let framesPerSecond;
+            let lastDelta;
+
+            let lastMessageTime;
+            let messageDeltaTimeInSeconds = 0.5;
+            let messageShownCount = 0;
+
+            let randomTextSets = [
+                /*[
+                    "vertrouw",
+                    "goed",
+                    "avontuur",
+                    "succes"
+                ],
+                [
+                    "angst",
+                    "gevaar",
+                    "wond",
+                    "vlucht"
+                ],*/
+                [
+                    //"nul",
+                    //"0",
+                    //"NUL",
+                    //"NIETS"
+                    "n",
+                    "u",
+                    "l"
+                ],
+                [
+                    //"één",
+                    //"1",
+                    //"ÉÉN",
+                    //"ENE",
+                    //"ONE"
+                    "é",
+                    "é",
+                    "n"
+                ],
+                [
+                    //"twee",
+                    //"2",
+                    //"TWEE",
+                    "t",
+                    "w",
+                    //"samen",
+                    "e",
+                    "e"
+                    //"TWO"
+                ],
+                [
+                    //"drie",
+                    //"3",
+                    //"DRIE",
+                    "d",
+                    "r",
+                    "i",
+                    "e"
+                    //"THREE"
+                ],
+                [
+                    //"vier",
+                    //"4",
+                    //"VIER",
+                    "v",
+                    "i",
+                    "e",
+                    "r",
+                    //"FOUR"
+                ],
+                [
+                    //"vijf",
+                    //"5",
+                    //"VIJF",
+                    "v",
+                    "i",
+                    "j",
+                    "ij",
+                    "f",
+                    //"FIVE"
+                ],
+                [
+                    //"zes",
+                    //"6",
+                    //"ZES",
+                    //"SIX",
+                    "z",
+                    "e",
+                    "s"
+                ],
+                [
+                    //"zeven",
+                    //"7",
+                    //"ZEVEN",
+                    //"SEVEN",
+                    "z",
+                    "e",
+                    "v",
+                    "e",
+                    "n"
+                ],
+                [
+                    //"acht",
+                    //"8",
+                    //"ACHT",
+                    //"EIGHT",
+                    "a",
+                    "c",
+                    "h",
+                    "t"
+                ],
+                [
+                    //"negen",
+                    //"9",
+                    //"NEGEN",
+                    //"NINE",
+                    "n",
+                    "e",
+                    "g",
+                    "e",
+                    "n"
+                ],
+            ]
+            let randomTextIndex = getRandomInt(randomTextSets.length);
+            let randomTextSet = randomTextSets[randomTextIndex];
+            //let randomText = Math.round(Math.random() * 100);
+            
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max));
+            }
+
+            let stop = false;
+
+            function repeatOften() {
+                if (stop) {
+                    return;
+                }
+                // Technical work
+                frames++;
+                startTime = startTime || Date.now();
+                lastDelta = Date.now() - currentTime;
+                currentTime = Date.now();
+                framesPerSecond = frames / (currentTime - startTime) * 1000;
+                // Show message when necessary
+                if (!lastMessageTime || Date.now() - lastMessageTime > 1000 * messageDeltaTimeInSeconds) {
+                    let randomText = randomTextSet[getRandomInt(randomTextSet.length)];
+                    document.getElementById('innermessage').innerHTML = randomText;
+                    document.getElementById('innermessage').style.left = getRandomInt(window.innerWidth - 400);
+                    document.getElementById('innermessage').style.top = getRandomInt(window.innerHeight - 200);
+                    document.getElementById('message').style.visibility = 'visible';
+                    lastMessageTime = Date.now();
+                    messageShownCount++;
+                } else {
+                    document.getElementById('message').style.visibility = 'hidden';
+                }
+                // If time is over, ask for the number
+                if (currentTime - startTime > 30 * 1000) {
+                    showOutro();
+                }
+                // Enqueue
+                requestAnimationFrame(repeatOften);
+            }
+
+            // Functions
+            function startGame() {
+                document.getElementById('intro').style.display = 'none';
+                requestAnimationFrame(repeatOften);
+                document.getElementById('game').style.display = 'block';
+                document.getElementById('outro').style.display = 'none';
+            }
+
+            function showOutro() {
+                document.getElementById('intro').style.display = 'none';
+                stop = true;
+                startTime = null;
+                document.getElementById('game').style.display = 'none';
+                document.getElementById('outro').style.display = 'block';
+            }
+
+            function checkNumber() {
+                document.getElementById('number').innerHTML = "Was het " + randomTextIndex + "?";
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id='intro'>
+            <p>
+                In de komende halve minuut krijg je een korte video te zien.
+            </p>
+            <p>
+                Na de video stel ik je een vraag die te maken heeft met een cijfer onder de 10.
+            </p>
+            <p>
+                Met een cijfer onder de 10 bedoel ik het cijfer 0, 1, 2, 3, 4, 5, 6, 7, 8 of 9.
+            </p>
+            <p>
+                <button onclick="startGame();">Laat maar komen</button>
+            </p>
+        </div>
+        <div id='game'>
+            <div id='message'>
+                <div id='innermessage'>
+                    TEST
+                </div>
+            </div>
+            <div id='default'>
+                <video autoplay muted loop>
+                    <source src="Particles - 28136.mp4" type="video/mp4">
+                    Sorry, your browser doesn't support embedded videos.
+                </video>
+            </div>
+        </div>
+        <div id='outro'>
+            <p>
+                Luister naar je gevoel en bedenk een cijfer onder de 10.
+            </p>
+            <p>
+                Klik vervolgens hieronder om ons te laten raden welk nummer je hebt gekozen.
+            </p>
+            <p>
+                <button onclick="checkNumber();">Check</button>
+            </p>
+            <p id='number'>
+                
+            </p>
+        </div>
+    </body>
+</html>
