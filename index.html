@@ -31,19 +31,19 @@
                     "gevaar",
                     "wond",
                     "vlucht"
-                ],*/
+                ],
                 [
                     //"nul",
                     //"0",
                     //"NUL",
                     //"NIETS"
-                    "n",
-                    "u",
-                    "l"
-                ],
+                    //"n",
+                    //"u",
+                    //"l"
+                ],*/
                 [
                     //"één",
-                    //"1",
+                    "1",
                     //"ÉÉN",
                     //"ENE",
                     //"ONE"
@@ -53,7 +53,7 @@
                 ],
                 [
                     //"twee",
-                    //"2",
+                    "2",
                     //"TWEE",
                     "t",
                     "w",
@@ -64,7 +64,7 @@
                 ],
                 [
                     //"drie",
-                    //"3",
+                    "3",
                     //"DRIE",
                     "d",
                     "r",
@@ -74,7 +74,7 @@
                 ],
                 [
                     //"vier",
-                    //"4",
+                    "4",
                     //"VIER",
                     "v",
                     "i",
@@ -84,7 +84,7 @@
                 ],
                 [
                     //"vijf",
-                    //"5",
+                    "5",
                     //"VIJF",
                     "v",
                     "i",
@@ -95,7 +95,7 @@
                 ],
                 [
                     //"zes",
-                    //"6",
+                    "6",
                     //"ZES",
                     //"SIX",
                     "z",
@@ -104,7 +104,7 @@
                 ],
                 [
                     //"zeven",
-                    //"7",
+                    "7",
                     //"ZEVEN",
                     //"SEVEN",
                     "z",
@@ -115,7 +115,7 @@
                 ],
                 [
                     //"acht",
-                    //"8",
+                    "8",
                     //"ACHT",
                     //"EIGHT",
                     "a",
@@ -125,7 +125,7 @@
                 ],
                 [
                     //"negen",
-                    //"9",
+                    "9",
                     //"NEGEN",
                     //"NINE",
                     "n",
@@ -160,7 +160,7 @@
                     let randomText = randomTextSet[getRandomInt(randomTextSet.length)];
                     document.getElementById('innermessage').innerHTML = randomText;
                     document.getElementById('innermessage').style.left = getRandomInt(window.innerWidth - 400);
-                    document.getElementById('innermessage').style.top = getRandomInt(window.innerHeight - 200);
+                    document.getElementById('innermessage').style.top = getRandomInt(window.innerHeight - 300);
                     document.getElementById('message').style.visibility = 'visible';
                     lastMessageTime = Date.now();
                     messageShownCount++;
@@ -192,7 +192,7 @@
             }
 
             function checkNumber() {
-                document.getElementById('number').innerHTML = "Was het " + randomTextIndex + "?";
+                document.getElementById('number').innerHTML = "Was het " + (randomTextIndex+1) + "?";
             }
 
         </script>
@@ -200,13 +200,13 @@
     <body>
         <div id='intro'>
             <p>
+                &nbsp;
+            </p>
+            <p>
                 In de komende halve minuut krijg je een korte video te zien.
             </p>
             <p>
-                Na de video stel ik je een vraag die te maken heeft met een cijfer onder de 10.
-            </p>
-            <p>
-                Met een cijfer onder de 10 bedoel ik het cijfer 0, 1, 2, 3, 4, 5, 6, 7, 8 of 9.
+                Let goed op. Na de video moet je een vraag beantwoorden.
             </p>
             <p>
                 <button onclick="startGame();">Laat maar komen</button>
@@ -227,7 +227,10 @@
         </div>
         <div id='outro'>
             <p>
-                Luister naar je gevoel en bedenk een cijfer onder de 10.
+                &nbsp;
+            </p>
+            <p>
+                Luister naar je gevoel en kies een cijfer onder de 10.
             </p>
             <p>
                 Klik vervolgens hieronder om ons te laten raden welk nummer je hebt gekozen.
